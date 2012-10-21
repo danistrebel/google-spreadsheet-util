@@ -20,6 +20,7 @@
 package com.signalcollect.google.spreadsheet;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -97,6 +98,11 @@ public class OAuth2 {
 			credential = authorize();
 
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			credential.refreshToken();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return credential.getAccessToken();
